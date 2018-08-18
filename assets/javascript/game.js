@@ -1,12 +1,13 @@
 var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var pokemonNames = ["Bulbasaur","Ivysaur","Charmander","Charizard","Squirtle","Wartortle","Caterpie","Metapod","Butterfree","Pidgeotto","Pidgeot","Raticate","Fearow","Arbok","Pikachu","Raichu","Sandshrew","Nidoran","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Gloom","Vileplume","Paras","Venonat","Diglett","Psyduck","Primeape","Growlithe","Arcanine","Poliwag","Abra","Alakazam","Bellsprout","Tentacruel","Geodude","Ponyta","Slowbro","Magnemite","Farfetchd","Dodrio","Seel","Dewgong","Muk","Cloyster","Gastly","Haunter","Gengar","Onix","Krabby","Exeggcute","Cubone","Marowak","Koffing","Rhyhorn","Kangaskhan","Horsea","Goldeen","Seaking","MrMime","Scyther","Jynx","Magmar","Pinsir","Magikarp","Lapras","Ditto","Eevee","Kabuto","Kabutops","Aerodactyl","Snorlax","Zapdos","Moltres","Dragonite","Mewtwo"];
+// var pokemonNames = ["Bulbasaur","Ivysaur","Charmander","Charizard","Squirtle","Wartortle","Caterpie","Metapod","Butterfree","Pidgeotto","Pidgeot","Raticate","Fearow","Arbok","Pikachu","Raichu","Sandshrew","Nidoran","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Gloom","Vileplume","Paras","Venonat","Diglett","Psyduck","Primeape","Growlithe","Arcanine","Poliwag","Abra","Alakazam","Bellsprout","Tentacruel","Geodude","Ponyta","Slowbro","Magnemite","Farfetchd","Dodrio","Seel","Dewgong","Muk","Cloyster","Gastly","Haunter","Gengar","Onix","Krabby","Exeggcute","Cubone","Marowak","Koffing","Rhyhorn","Kangaskhan","Horsea","Goldeen","Seaking","MrMime","Scyther","Jynx","Magmar","Pinsir","Magikarp","Lapras","Ditto","Eevee","Kabuto","Kabutops","Aerodactyl","Snorlax","Zapdos","Moltres","Dragonite","Mewtwo"];
+var pokemonNames = ["test"];
 
 var correctWordArr;
 var wordInProgress;
 var displayWord;
 var incorrectGuesses = [];
 var correctGuesses = [];
-var guessesRemaining = 7;
+var guessesRemaining = 10;
 var wins = 0;
 
 function getWord() {
@@ -38,8 +39,10 @@ function update() {
 function reset() {
   incorrectGuesses = [];
   correctGuesses = [];
-  guessesRemaining = 7;
+  guessesRemaining = 10;
   wordInProgress = [];
+  document.querySelector('.instruction').innerHTML = "Press any key to begin guessing";
+  document.querySelector('.pokemon-image').src = "assets/images/blank.jpg";
   getWord();
   update();
 }
@@ -69,37 +72,41 @@ document.onkeyup = function(event) {
 
   // Check if key pressed is a letter
   if (letters.indexOf(userGuess) >= 0) {
+    // Only run if you have guesses remaining
+    if (guessesRemaining > 0) {
+      // Check if key pressed is in the current word (aka it's a correct guess)
+      if (correctWordArr.indexOf(userGuess) >= 0) {
+          // Push userGuess to correctGuesses
+          correctGuesses.push(userGuess);
+          // Replace the underscores with userGuess, including repeated letters
+          wordInProgress = printWordInProgress(correctWordArr, correctGuesses);
 
-    // Check if key pressed is in the current word (aka it's a correct guess)
-    if (correctWordArr.indexOf(userGuess) >= 0) {
-      // Push userGuess to correctGuesses
-      correctGuesses.push(userGuess);
-      // Replace the underscores with userGuess, including repeated letters
-      wordInProgress = printWordInProgress(correctWordArr, correctGuesses);
-
-      // Update displayWord with new values
-      displayWord = wordInProgress.join(' ');
-      update();
-
-      // Check for win condition (if correctWordArr has no more underscores)
-      if (wordInProgress.indexOf("_") == -1) {
-        wins++;
+        // Update displayWord with new values
+        displayWord = wordInProgress.join(' ');
         update();
-        reset();
+
+        // Check for win condition (if correctWordArr has no more underscores)
+        if (wordInProgress.indexOf("_") == -1) {
+          wins++;
+          document.querySelector('.instruction').innerHTML = "Nice work! Click reset to start a new word.";
+          // Change pokemon image to show the correct pokemon
+          // document.querySelector('.pokemon-image').src = "assets/images/" +  + ".png";
+          update();
+          
+        }
+
+      // If userGuess doesn't match any letter in correctWordArr AND hasn't been guessed before 
+      } else if (correctWordArr.indexOf(userGuess) == -1 && incorrectGuesses.indexOf(userGuess) == -1) {
+        incorrectGuesses.push(userGuess);
+        guessesRemaining--;
+        update();
+
+        // If no more guesses left, you lose the game and it resets
+        if (guessesRemaining == 0) {
+          document.querySelector('.instruction').innerHTML = 'You lose! The word was "' + correctWordArr.join("") + '" Click reset to start a new word.';
+        }
+
       }
-
-    // If userGuess doesn't match any letter in correctWordArr AND hasn't been guessed before 
-    } else if (correctWordArr.indexOf(userGuess) == -1 && incorrectGuesses.indexOf(userGuess) == -1) {
-      incorrectGuesses.push(userGuess);
-      guessesRemaining--;
-      update();
-
-      // If no more guesses left, you lose the game and it resets
-      if (guessesRemaining == 0) {
-        alert('You lose! The word was "' + correctWordArr.join("") + '"');
-        reset();
-      }
-
     }
 
   };

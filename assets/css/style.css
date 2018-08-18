@@ -1,0 +1,29 @@
+body {
+  background: url(../images/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.main-title {
+  height: 250px;
+}
+
+/* .instruction {
+  margin
+} */
+
+#guesses-left {
+  color: red;
+  font-size: 120%;
+}
+
+.pokemon-image {
+  height: 200px;
+}
+
+#guesses {
+  height: 20px;
+}
