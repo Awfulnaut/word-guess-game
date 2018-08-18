@@ -15,7 +15,7 @@ body {
   margin
 } */
 
-#guesses-left {
+#guesses-left, #guesses {
   color: red;
   font-size: 120%;
 }

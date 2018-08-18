@@ -1,12 +1,12 @@
 var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var pokemonNames = ["Bulbasaur", "Ivysaur", "Charmander", "Charizard", "Squirtle", "Wartortle", "Caterpie", "Metapod", "Butterfree", "Pidgeotto", "Pidgeot", "Raticate", "Fearow", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Nidoran", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Gloom", "Vileplume", "Paras", "Venonat", "Diglett", "Psyduck", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Abra", "Alakazam", "Bellsprout", "Tentacruel", "Geodude", "Ponyta", "Slowbro", "Magnemite", "Farfetchd", "Dodrio", "Seel", "Dewgong", "Muk", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Krabby", "Exeggcute", "Cubone", "Marowak", "Koffing", "Rhyhorn", "Kangaskhan", "Horsea", "Goldeen", "Seaking", "MrMime", "Scyther", "Jynx", "Magmar", "Pinsir", "Magikarp", "Lapras", "Ditto", "Eevee", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Zapdos", "Moltres", "Dragonite", "Mewtwo"];
+var pokemonNames = ["Bulbasaur", "Ivysaur", "Charmander", "Charizard", "Squirtle", "Wartortle", "Caterpie", "Metapod", "Butterfree", "Pidgeotto", "Pidgeot", "Raticate", "Fearow", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Nidoran", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Gloom", "Vileplume", "Paras", "Venonat", "Diglett", "Psyduck", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Abra", "Alakazam", "Bellsprout", "Tentacruel", "Geodude", "Ponyta", "Slowbro", "Magnemite", "Farfetchd", "Dodrio", "Seel", "Dewgong", "Muk", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Krabby", "Exeggcute", "Cubone", "Marowak", "Koffing", "Rhydhorn", "Kangaskhan", "Horsea", "Goldeen", "Seaking", "MrMime", "Scyther", "Jynx", "Magmar", "Pinsir", "Magikarp", "Lapras", "Ditto", "Eevee", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Zapdos", "Moltres", "Dragonite", "Mewtwo"];
 
 var correctWordArr;
 var wordInProgress;
 var displayWord;
 var incorrectGuesses = [];
 var correctGuesses = [];
-var guessesRemaining = 10;
+var guessesRemaining = 15;
 var wins = 0;
 var roundComplete = false;
 
@@ -44,10 +44,10 @@ function update() {
 function reset() {
   incorrectGuesses = [];
   correctGuesses = [];
-  guessesRemaining = 10;
+  guessesRemaining = 15;
   wordInProgress = [];
   roundComplete = false;
-  document.querySelector('.instruction').innerHTML = "Press any key to begin guessing";
+  document.querySelector('.instruction').innerHTML = "Press any letter to begin";
   changePokemonImage("blank");
   document.querySelector('.pokemon-image').src = "assets/images/blank.jpg";
   getWord();
