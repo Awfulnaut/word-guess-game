@@ -6,7 +6,7 @@ var wordInProgress;
 var displayWord;
 var incorrectGuesses = [];
 var correctGuesses = [];
-var guessesRemaining = 15;
+var guessesRemaining = 10;
 var wins = 0;
 var roundComplete = false;
 
@@ -44,10 +44,11 @@ function update() {
 function reset() {
   incorrectGuesses = [];
   correctGuesses = [];
-  guessesRemaining = 15;
+  guessesRemaining = 10;
   wordInProgress = [];
   roundComplete = false;
   document.querySelector('.instruction').innerHTML = "Press any letter to begin";
+  document.querySelector('#current-word').className = "";
   changePokemonImage("blank");
   document.querySelector('.pokemon-image').src = "assets/images/blank.jpg";
   getWord();
@@ -106,6 +107,8 @@ document.onkeyup = function (event) {
 
           // Update the page with new instructions
           document.querySelector('.instruction').innerHTML = "Nice work! Click reset to start a new word.";
+
+          document.querySelector('#current-word').className = "correct";
 
           // Change pokemon image to show the correct pokemon
           changePokemonImage(correctWord);

@@ -11,9 +11,19 @@ body {
   height: 250px;
 }
 
-/* .instruction {
-  margin
-} */
+#current-word {
+  font-size: 120%;
+  border: 3px solid #007bff;
+  padding: 15px 40px;
+  width: fit-content;
+  margin: 15px auto;
+}
+
+.correct {
+  color: #5cb85c;
+  font-size: 175% !important;
+  border-color: #5cb85c !important;
+}
 
 #guesses-left, #guesses {
   color: red;
